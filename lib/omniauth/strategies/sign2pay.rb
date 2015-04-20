@@ -1,23 +1,17 @@
-require "omniauth"
+require "omniauth-oauth2"
 
 module OmniAuth
   module Strategies
-    class Sign2pay
-      include OmniAuth::Strategy
+    class Sign2pay < OmniAuth::Strategies::OAuth2
 
       # args receives parameters from the strategy declaration in client's rack middleware
-      args [:client_id, :client_secret, :redirect_uri]
+      option :client_options, {
+        :site => "http://sign2pay.dev",
+        :authorize_url => "http://sign2pay.dev/oauth/authorize",
+        :token_url => "http://sign2pay.dev/oauth/token"
+      }
 
       option :name, "sign2pay"
-
-      # redirect to sign2pay server site for authentication of client
-      def request_phase
-        redirect :redirect_uri
-      end
-
-      # after authentication with sign2pay, redirect to client and send along info about client
-      def callback_phase
-      end
 
       uid { request.params['user_id'] }
 
