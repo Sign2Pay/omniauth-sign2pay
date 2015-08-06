@@ -6,18 +6,18 @@ module OmniAuth
 
       # args receives parameters from the strategy declaration in client's rack middleware
       option :client_options, {
-        :site => "http://sign2pay.dev",
-        :authorize_url => "http://sign2pay.dev/oauth/authorize",
-        :token_url => "http://sign2pay.dev/oauth/token"
+        :site => "https://app.sign2pay.com/",
+        :authorize_url => "https://app.sign2pay.com/oauth/authorize",
+        :token_url => "https://app.sign2pay.com/oauth/token"
       }
 
       option :name, "sign2pay"
 
-      uid { request.params['user_id'] }
+      uid { request.params['identifier'] }
 
       info do
         {
-          :email => request.params['email']
+          :email => request.params['identifier']
         }
       end
 

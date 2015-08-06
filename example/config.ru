@@ -25,7 +25,7 @@ end
 use Rack::Session::Cookie, :secret => 'change_me'
 
 use OmniAuth::Builder do
-  provider :sign2pay, ENV['APPLICATION_ID'], ENV['CLIENT_SECRET']
+  provider :sign2pay, ENV['CLIENT_ID'], ENV['CLIENT_SECRET']
 end
 
 run App.new
